@@ -1,50 +1,51 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version change: INITIAL → 1.0.0
+Initial constitution creation for MelodyGame project
+Added sections: All core sections established
+Templates requiring updates: ✅ Updated .specify/templates/plan-template.md (constitution version reference)
+Follow-up TODOs: None
+-->
+
+# MelodyGame Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Audio Quality First
+Audio processing MUST maintain highest fidelity throughout the signal chain. All audio components MUST be tested for latency, distortion, and quality degradation. Real-time audio processing MUST prioritize consistency over complexity.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+**Rationale**: Music games depend on precise audio reproduction for gameplay accuracy and user experience.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Real-Time Performance (NON-NEGOTIABLE)
+Game loops MUST maintain consistent frame rates with audio-video synchronization within 10ms tolerance. Audio processing MUST complete within allocated time slices without blocking. Memory allocation in audio threads is FORBIDDEN.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**Rationale**: Timing precision is fundamental to music game mechanics and user experience.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Test-Driven Development (NON-NEGOTIABLE)
+TDD mandatory: Tests written → Requirements validated → Tests fail → Implementation begins. All timing-critical code MUST have automated timing tests. Audio components MUST have signal quality tests.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Rationale**: Music games require precise behavior that cannot be verified through manual testing alone.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Modular Architecture
+Game components MUST be independently testable and loosely coupled. Audio engine, game logic, and UI MUST communicate through well-defined interfaces. Each module MUST have clear responsibility boundaries.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**Rationale**: Enables parallel development, easier testing, and component reusability across different game modes.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Accessibility & Usability
+MUST support visual indicators for audio cues. MUST provide configurable difficulty levels and control schemes. UI MUST follow accessibility guidelines (WCAG 2.1 AA minimum). Audio MUST support hearing accessibility features.
+
+**Rationale**: Music games should be enjoyable and accessible to players with varying abilities and preferences.
+
+## Performance Standards
+
+Audio latency MUST NOT exceed 20ms from input to output. Game MUST maintain 60fps minimum on target platforms. Memory usage MUST stay within platform constraints (1GB for mobile, 4GB for desktop). Audio dropouts or stutters are considered critical bugs.
+
+## Development Workflow
+
+Code reviews MUST verify audio performance impact and accessibility compliance. All audio-related changes MUST include listening tests. Performance regression tests MUST pass before merge. Documentation MUST include audio setup instructions and troubleshooting guides.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Constitution supersedes all other development practices. Amendments require documentation of impact, approval from project maintainers, and migration plan for existing code. All PRs MUST verify compliance with relevant principles. Complexity MUST be justified against simpler alternatives.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-09-26 | **Last Amended**: 2025-09-26
