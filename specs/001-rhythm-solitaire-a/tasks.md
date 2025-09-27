@@ -65,10 +65,10 @@
 - [x] T018 [P] BeatGrid entity model in Assets/Scripts/Audio/BeatGrid.cs
 
 ## Phase 3.4: Core Engine Implementation (TDD Sequential)
-- [ ] T019 AudioEngine implementation with constitutional memory constraints in Assets/Scripts/Audio/AudioEngine.cs
-- [ ] T020 CardGameEngine implementation with deterministic testing support in Assets/Scripts/Cards/CardGameEngine.cs
-- [ ] T021 PowerCardSystem implementation with rhythm synchronization in Assets/Scripts/PowerCards/PowerCardSystem.cs
-- [ ] T022 PlayerProgressSystem implementation with offline-first architecture in Assets/Scripts/Progression/PlayerProgressSystem.cs
+- [x] T019 AudioEngine implementation with constitutional memory constraints in Assets/Scripts/Audio/AudioEngine.cs
+- [x] T020 CardGameEngine implementation with deterministic testing support in Assets/Scripts/Cards/CardGameEngine.cs
+- [x] T021 PowerCardSystem implementation with rhythm synchronization in Assets/Scripts/PowerCards/PowerCardSystem.cs
+- [x] T022 PlayerProgressSystem implementation with offline-first architecture in Assets/Scripts/Progression/PlayerProgressSystem.cs
 
 ## Phase 3.5: Integration Tests (Quickstart Scenarios)
 - [ ] T023 [P] Integration test: Basic rhythm gameplay scenario in Tests/PlayMode/Scenarios/BasicRhythmGameplayTests.cs

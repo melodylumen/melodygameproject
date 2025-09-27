@@ -193,21 +193,6 @@ namespace RhythmSolitaire.PowerCards
         #endregion
     }
 
-    public enum PowerCardType
-    {
-        Shuffle,
-        Reveal,
-        Multiply,
-        Tempo
-    }
-
-    public enum TimingAccuracy
-    {
-        Perfect,
-        Good,
-        Missed
-    }
-
     public enum ActivationResult
     {
         Success,

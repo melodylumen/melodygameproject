@@ -219,18 +219,4 @@ namespace RhythmSolitaire.Audio
         }
     }
 
-    public enum TimingAccuracy
-    {
-        Perfect,
-        Good,
-        Missed
-    }
-
-    public enum DifficultyLevel
-    {
-        Easy,
-        Normal,
-        Hard,
-        Expert
-    }
 }
