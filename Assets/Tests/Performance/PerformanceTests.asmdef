@@ -1,0 +1,24 @@
+{
+    "name": "RhythmSolitaire.PerformanceTests",
+    "rootNamespace": "RhythmSolitaire.Tests.Performance",
+    "references": [
+        "UnityEngine.TestRunner",
+        "Unity.PerformanceTesting",
+        "RhythmSolitaire.Runtime",
+        "RhythmSolitaire.Audio",
+        "RhythmSolitaire.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -2,7 +2,7 @@
 # Implementation Plan: Rhythm Solitaire
 
 **Branch**: `001-rhythm-solitaire-a` | **Date**: 2025-09-26 | **Spec**: [spec.md](./spec.md)
-**Input**: Feature specification from `/specs/001-rhythm-solitaire-a/spec.md`
+**Input**: Feature specification from `C:\Users\pdbro\IdeaProjects\MelodyGameProject\specs\001-rhythm-solitaire-a\spec.md`
 
 ## Execution Flow (/plan command scope)
 ```
@@ -31,51 +31,46 @@
 - Phase 3-4: Implementation execution (manual or via tools)
 
 ## Summary
-Rhythm Solitaire combines traditional solitaire gameplay with rhythm game mechanics, requiring players to move cards in sync with dynamic music. The game features adaptive timing tolerances, star-based progression, multiple game modes, and cross-platform deployment (PC, Nintendo Switch, Mobile). Technical approach leverages game engine architecture for real-time audio processing, modular component design, and offline-first data persistence with optional online sync.
+Rhythm Solitaire combines traditional solitaire strategy with rhythm game mechanics, requiring players to move cards in sync with music beats. Players clear solitaire-style layouts while building dynamic soundtracks through their actions, featuring adaptive timing tolerance, star-based progression, and cross-platform deployment with offline-first design.
 
 ## Technical Context
-**Language/Version**: C# 9.0+ (Unity) or GDScript/C# (Godot) - NEEDS CLARIFICATION: specific game engine choice
-**Primary Dependencies**: Game Engine (Unity/Godot), Audio processing library, Cross-platform input handling - NEEDS CLARIFICATION
-**Storage**: Local file system for save data, optional cloud storage for cross-device sync
-**Testing**: Engine-specific testing frameworks, automated timing accuracy tests - NEEDS CLARIFICATION
-**Target Platform**: PC (Windows/Mac/Linux), Nintendo Switch, iOS/Android
-**Project Type**: Cross-platform game - single codebase with platform-specific builds
-**Performance Goals**: 60fps stable, <20ms audio latency, <10ms timing synchronization tolerance
-**Constraints**: Memory usage within platform limits (1GB mobile, 4GB desktop), offline-capable core gameplay
-**Scale/Scope**: Single-player focused, ~50 levels across 5-10 worlds, 3 game modes, multiple music genres
+**Language/Version**: C# 9.0+ with Unity 6 LTS
+**Primary Dependencies**: FMOD Studio 2.02+, Unity Test Framework, Unity Input System
+**Storage**: Local file storage for saves, optional cloud sync for progression
+**Testing**: Unity Test Framework with specialized timing tests
+**Target Platform**: Cross-platform (PC, Nintendo Switch, iOS/Android)
+**Project Type**: Unity game - single project with modular architecture
+**Performance Goals**: 60fps stable, <20ms audio latency, <10ms audio-video sync
+**Constraints**: <20ms audio latency, zero allocation in audio threads, offline-first design
+**Scale/Scope**: Single-player rhythm game with multiple game modes and progressive difficulty
 
 ## Constitution Check
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-**I. Audio Quality First**: ✅ PASS (Post-Design Verification)
-- `IAudioEngine.GetCurrentLatencyMs()` contract enforces <20ms constitutional requirement
-- `BeatTimingData` struct provides precise timing with <5ms completion requirement
-- Signal quality testing implemented via `VisualBeatData` for validation
-- FMOD Studio research confirms professional-grade audio processing capability
+**I. Audio Quality First**: ✅ PASS
+- FMOD Studio 2.02+ provides professional audio processing
+- Signal chain fidelity maintained throughout audio pipeline
+- Audio latency testing planned in test framework
 
-**II. Real-Time Performance (NON-NEGOTIABLE)**: ✅ PASS (Post-Design Verification)
-- All interface methods specify performance constraints: <1-5ms completion times
-- `IAudioEngine.ValidateMoveTiming()` must complete within <1ms for real-time feedback
-- Memory allocation explicitly forbidden in contracts: "Must use pre-allocated layer objects only"
-- Pre-allocated object pools documented in data-model.md memory management section
+**II. Real-Time Performance (NON-NEGOTIABLE)**: ✅ PASS
+- 60fps target with <10ms audio-video sync tolerance specified
+- Zero allocation in audio threads explicitly required
+- Frame rate monitoring and audio thread performance testing planned
 
-**III. Test-Driven Development (NON-NEGOTIABLE)**: ✅ PASS (Post-Design Verification)
-- Interface contracts designed for testability with deterministic requirements
-- `ICardGameEngine.ExecuteMove()` specifies "Must be deterministic for automated testing"
-- Quickstart.md provides comprehensive test scenarios for validation
-- Performance validation tools specified: Unity Profiler, FMOD profiler, LatencyMon
+**III. Test-Driven Development (NON-NEGOTIABLE)**: ✅ PASS
+- Unity Test Framework chosen for timing-critical code testing
+- Specialized timing tests planned for audio synchronization
+- TDD workflow planned for all audio and rhythm components
 
-**IV. Modular Architecture**: ✅ PASS (Post-Design Verification)
-- Four independent interface contracts created: IAudioEngine, ICardGameEngine, IPowerCardSystem, IPlayerProgressSystem
-- Each interface has clearly defined boundaries and responsibilities
-- Event-based communication prevents tight coupling between modules
-- Data model shows clear entity relationships without implementation dependencies
+**IV. Modular Architecture**: ✅ PASS
+- Interface-based design with IAudioEngine, ICardGameEngine, etc.
+- Loosely coupled components specified in architecture
+- Clear responsibility boundaries between audio, game logic, and UI
 
-**V. Accessibility & Usability**: ✅ PASS (Post-Design Verification)
-- `VisualBeatData` struct provides visual beat indicators for hearing-impaired players
-- `AccessibilityPreferences` in data model includes comprehensive accessibility settings
-- Quickstart Scenario 5 specifically validates visual-only gameplay
-- Adaptive timing tolerance implemented via `accuracyWindows` in BeatGrid entity
+**V. Accessibility & Usability**: ✅ PASS
+- Visual indicators for audio cues specified in FR-007
+- Configurable difficulty levels with adaptive timing tolerance
+- WCAG 2.1 AA compliance planned for UI components
 
 ## Project Structure
 
@@ -92,32 +87,28 @@ specs/[###-feature]/
 
 ### Source Code (repository root)
 ```
-Assets/                          # Game engine assets directory
+Assets/
 ├── Scripts/
-│   ├── Audio/                   # Audio processing and rhythm engine
-│   ├── Cards/                   # Card game logic and models
-│   ├── UI/                      # User interface components
-│   ├── GameModes/               # Campaign, Endless, Challenge modes
-│   ├── Progression/             # Star system and level management
-│   ├── PowerCards/              # Special abilities and effects
-│   └── Core/                    # Shared utilities and managers
-├── Scenes/                      # Game scenes and levels
-├── Audio/                       # Music tracks and sound effects
-├── Art/                         # Visual assets (cards, UI, backgrounds)
-├── Data/                        # Level definitions and configuration
-└── Prefabs/                     # Reusable game objects
+│   ├── Audio/          # FMOD integration, rhythm engine
+│   ├── Cards/          # Solitaire game logic
+│   ├── UI/             # Interface components
+│   ├── GameModes/      # Campaign, Endless, Challenge
+│   ├── Progression/    # Star system, unlocks
+│   ├── PowerCards/     # Special abilities
+│   └── Core/           # Shared utilities, managers
+├── Tests/
+│   ├── EditMode/       # Unit tests for game logic
+│   ├── PlayMode/       # Integration tests for timing
+│   └── Performance/    # Audio latency and frame rate tests
+├── Audio/              # FMOD banks and audio assets
+├── Prefabs/            # UI and game object prefabs
+└── Scenes/             # Game scenes and levels
 
-Tests/
-├── PlayMode/                    # Integration tests that run in game mode
-├── EditMode/                    # Unit tests for editor-time components
-├── Performance/                 # Audio latency and timing accuracy tests
-└── Accessibility/               # WCAG compliance and visual indicator tests
-
-ProjectSettings/                 # Platform-specific build configurations
-└── [engine-specific settings]
+Packages/               # Unity package dependencies
+ProjectSettings/        # Unity project configuration
 ```
 
-**Structure Decision**: Cross-platform game engine architecture selected. Game logic organized by domain (Audio, Cards, UI, etc.) with clear separation of concerns. Testing structure supports both unit tests (EditMode) and integration tests (PlayMode) as required by constitutional TDD mandate.
+**Structure Decision**: Unity 6 LTS single project structure with modular script organization. Test assemblies separated by type (Edit Mode for logic, Play Mode for integration, Performance for timing validation). Audio assets managed through FMOD Studio integration.
 
 ## Phase 0: Outline & Research
 1. **Extract unknowns from Technical Context** above:
@@ -178,58 +169,35 @@ ProjectSettings/                 # Platform-specific build configurations
 
 **Task Generation Strategy**:
 - Load `.specify/templates/tasks-template.md` as base template
-- Generate tasks from completed Phase 1 design artifacts:
-  - `data-model.md`: 7 entities → 7 model creation tasks [P]
-  - `contracts/`: 4 interfaces → 4 contract test tasks [P]
-  - `quickstart.md`: 7 scenarios → 7 integration test tasks
-  - Research findings: Unity/FMOD setup tasks
+- Generate tasks from Phase 1 artifacts: 4 interface contracts, 7 data entities, 7 quickstart scenarios
+- Interface contracts → Unity C# interface definition tasks [P]
+- Data entities → Unity ScriptableObject/MonoBehaviour model tasks [P]
+- Quickstart scenarios → Unity Test Framework integration test tasks
+- FMOD integration → Audio engine implementation tasks
+- UI components → Unity UI system implementation tasks
+- Performance validation → Constitutional compliance testing tasks
 
 **Specific Task Categories**:
-1. **Setup Tasks** (Sequential):
-   - Unity 6 LTS project initialization
-   - FMOD Studio integration setup
-   - Constitutional compliance tooling setup
-
-2. **Contract Test Tasks** [P] (Parallel):
-   - IAudioEngine contract tests
-   - ICardGameEngine contract tests
-   - IPowerCardSystem contract tests
-   - IPlayerProgressSystem contract tests
-
-3. **Model Creation Tasks** [P] (Parallel):
-   - GameSession, Card, MusicTrack, PowerCard entities
-   - PlayerProfile, Level/World, BeatGrid entities
-
-4. **Implementation Tasks** (TDD Sequential):
-   - Audio engine implementation (constitutional memory constraints)
-   - Card game engine implementation
-   - Power card system implementation
-   - Player progress system implementation
-
-5. **Integration Test Tasks**:
-   - Quickstart scenario automation (7 scenarios)
-   - Performance validation tests (latency, frame rate)
-   - Accessibility compliance tests
+1. **Interface Implementation** (4 tasks): IAudioEngine, ICardGameEngine, IPowerCardSystem, IPlayerProgressSystem
+2. **Data Model Creation** (7 tasks): GameSession, Card, MusicTrack, PowerCard, PlayerProfile, Level, BeatGrid
+3. **Core System Implementation** (8 tasks): Audio synchronization, card game logic, rhythm detection, combo system
+4. **UI Component Development** (6 tasks): Beat indicators, card display, score UI, accessibility features
+5. **Integration Testing** (7 tasks): Based on quickstart scenarios 1-7
+6. **Performance Validation** (4 tasks): Audio latency, frame rate, memory allocation, timing accuracy
 
 **Ordering Strategy**:
-- **Phase A**: Setup tasks (1-3) - Sequential dependency chain
-- **Phase B**: Contract tests + Models (4-11) - [P] parallel execution
-- **Phase C**: Core implementations (12-20) - TDD sequential order
-- **Phase D**: Integration validation (21-28) - Depends on implementations
+- TDD order: Test frameworks first, then interface tests, then implementations
+- Dependency order: Core interfaces → Data models → Audio engine → Game logic → UI → Integration tests
+- Constitutional compliance: Performance tests throughout development
+- Mark [P] for parallel execution where Unity assemblies are independent
 
-**Constitutional Compliance Integration**:
-- Each implementation task includes constitutional verification steps
-- Performance tasks validate <20ms audio latency and 60fps requirements
-- TDD tasks ensure test-first development approach
-- Memory management tasks validate zero audio thread allocation
+**Unity-Specific Considerations**:
+- Assembly definition files for modular compilation
+- FMOD Studio integration tasks sequenced after audio interface
+- Unity Test Framework setup for Edit Mode and Play Mode testing
+- Cross-platform build tasks for Nintendo Switch, PC, mobile
 
-**Estimated Task Count**: 28-32 numbered, ordered tasks
-
-**Dependencies Map**:
-- Audio engine → Card game engine → Power card system → Player progress
-- All contract tests independent [P]
-- All model creation independent [P]
-- Integration tests depend on all implementations
+**Estimated Output**: 32-36 numbered, dependency-ordered tasks in tasks.md
 
 **IMPORTANT**: This phase is executed by the /tasks command, NOT by /plan
 
@@ -264,7 +232,7 @@ ProjectSettings/                 # Platform-specific build configurations
 - [x] Initial Constitution Check: PASS
 - [x] Post-Design Constitution Check: PASS
 - [x] All NEEDS CLARIFICATION resolved
-- [x] Complexity deviations documented (none required)
+- [ ] Complexity deviations documented
 
 ---
 *Based on Constitution v1.0.0 - See `/memory/constitution.md`*

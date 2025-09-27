@@ -1,0 +1,16 @@
+{
+    "name": "RhythmSolitaire.Progression",
+    "rootNamespace": "RhythmSolitaire.Progression",
+    "references": [
+        "RhythmSolitaire.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

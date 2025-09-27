@@ -1,0 +1,28 @@
+{
+    "name": "RhythmSolitaire.EditModeTests",
+    "rootNamespace": "RhythmSolitaire.Tests.EditMode",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "RhythmSolitaire.Runtime",
+        "RhythmSolitaire.Audio",
+        "RhythmSolitaire.Cards",
+        "RhythmSolitaire.PowerCards",
+        "RhythmSolitaire.Progression"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

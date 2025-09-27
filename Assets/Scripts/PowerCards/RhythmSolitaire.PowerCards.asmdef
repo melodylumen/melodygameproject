@@ -1,0 +1,17 @@
+{
+    "name": "RhythmSolitaire.PowerCards",
+    "rootNamespace": "RhythmSolitaire.PowerCards",
+    "references": [
+        "RhythmSolitaire.Core",
+        "RhythmSolitaire.Audio"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
